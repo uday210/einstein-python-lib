@@ -5,17 +5,16 @@ from einstein.constants import ACCESS_TOKEN
 
 def main():
     access_token = ACCESS_TOKEN
-    docuemt = 'what is the weather in los angeles'
-    model_id = 'V3E7CDCNLYMQD7XFM3NBXMZICE'
+    docuemt = 'An intermittently pleasing but mostly routine effort'
+    model_id = 'VLEITGZ347BJBAQOHCDFV4VXTI'
     prediction = Prediction(access_token=access_token)
-    response = prediction.predict_intent(docuemt, model_id)
+    response = prediction.predict_sentiment(docuemt, model_id)
 
     try:
         probabilities = response['probabilities']
         for x in probabilities:
             print(str(x['label']) + ":" + str(x['probability']))
 
-        #print(json.dumps(response, indent=4, sort_keys=True))
     except TypeError :
         print('response ok? ' + str(response.ok))
         print('response content: ' + str(response.content))
