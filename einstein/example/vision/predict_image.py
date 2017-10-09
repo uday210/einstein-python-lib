@@ -10,14 +10,9 @@ def main():
     model_id = 'FoodImageClassifier'
     prediction = Prediction(access_token=access_token)
     response = prediction.predict_remote_image(url, model_id)
-    print(response)
-
-    try:
-        print(json.dumps(response, indent=4, sort_keys=True))
-    except TypeError :
-        print('response ok? ' + str(response.ok))
-        print('response content: ' + str(response.content))
-    return True
+    probabilities = response['probabilities']
+    for x in probabilities:
+        print(str(x['label']) + ":" + str(x['probability']))
 
 
 if __name__ == "__main__":
