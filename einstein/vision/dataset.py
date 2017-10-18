@@ -12,10 +12,14 @@ class DataSet:
         self.access_token = access_token
 
     def create_dataset(self, path):
+        type = "image"
+        return self._create_dataset(path, type)
+
+    def _create_dataset(self, path, type):
         multipart_data = MultipartEncoder(
             fields={
                 'path': path,
-                'type': 'image'
+                'type': type
             }
         )
         headers = {'Authorization': 'Bearer ' + self.access_token,
@@ -24,6 +28,10 @@ class DataSet:
                             headers=headers, data=multipart_data)
         json_response = json.loads(res.text)
         return json_response
+
+    def create_object_detection_dataset(self, path):
+        type = 'image-detection'
+        return self._create_dataset(path, type)
 
     def delete_dataset(self, _id, name):
         multipart_data = MultipartEncoder(
