@@ -11,7 +11,7 @@ def main():
     access_token = ACCESS_TOKEN
     dataset = DataSet(access_token=access_token)
     path = 'http://einstein.ai/text/weather.csv'
-    response = dataset.create_dataset(path)
+    response = dataset.create_intent_dataset(path)
     print(json.dumps(response, indent=4, sort_keys=True))
 
 if __name__ == "__main__":

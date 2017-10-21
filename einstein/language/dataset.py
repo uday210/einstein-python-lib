@@ -11,11 +11,19 @@ class DataSet:
     def __init__(self,access_token):
         self.access_token = access_token
 
-    def create_dataset(self, path):
+    def create_intent_dataset(self, path):
+        type = 'text-intent'
+        return self._create_dataset(path, type)
+
+    def create_sentiment_dataset(self, path):
+        type = 'text-sentiment'
+        return self._create_dataset(path, type)
+
+    def _create_dataset(self, path, type):
         multipart_data = MultipartEncoder(
             fields={
                 'path': path,
-                'type': 'text-intent'
+                'type': type
             }
         )
         headers = {'Authorization': 'Bearer ' + self.access_token,
@@ -30,7 +38,7 @@ class DataSet:
             fields={})
         headers = {'Authorization': 'Bearer ' + self.access_token,
                    'Content-Type': multipart_data.content_type}
-        res = requests.post(LANG_DATASETS_URL + '/' + id,
+        res = requests.delete(LANG_DATASETS_URL + '/' + id,
                             headers=headers, data=multipart_data)
 
         return res
@@ -42,6 +50,19 @@ class DataSet:
                    'Content-Type': multipart_data.content_type}
         res = requests.get(LANG_DATASETS_URL + '/' + id,
                               headers=headers, data=multipart_data)
+        if res.ok:
+            json_response = json.loads(res.text)
+            return json_response
+        else:
+            return res
+
+    def get_all_datasets(self):
+        multipart_data = MultipartEncoder(
+            fields={'type': 'image'})
+        headers = {'Authorization': 'Bearer ' + self.access_token,
+                   'Content-Type': multipart_data.content_type}
+        res = requests.get(LANG_DATASETS_URL,
+                           headers=headers, data=multipart_data)
         if res.ok:
             json_response = json.loads(res.text)
             return json_response

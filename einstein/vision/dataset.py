@@ -39,7 +39,7 @@ class DataSet:
                     'datasetId': _id})
         headers = {'Authorization': 'Bearer ' + self.access_token,
                    'Content-Type': multipart_data.content_type}
-        res = requests.post(DATASETS_URL + '/train',
+        res = requests.delete(DATASETS_URL + '/train',
                             headers=headers, data=multipart_data)
 
         return res
@@ -59,7 +59,17 @@ class DataSet:
         pass
 
     def get_all_datasets(self):
-        pass
+        multipart_data = MultipartEncoder(
+            fields={'type': 'image'})
+        headers = {'Authorization': 'Bearer ' + self.access_token,
+                   'Content-Type': multipart_data.content_type}
+        res = requests.get(DATASETS_URL,
+                           headers=headers, data=multipart_data)
+        if res.ok:
+            json_response = json.loads(res.text)
+            return json_response
+        else:
+            return res
 
     def get_dataset_details(self, id):
         multipart_data = MultipartEncoder(
