@@ -5,7 +5,7 @@ from einstein.constants import ACCESS_TOKEN
 
 def main():
     access_token = ACCESS_TOKEN
-    id = 'DEDB556AH7PIGTLZLXUOZJWTTA'
+    id = 'NLTHWYUZ4JU5HRTSTEDPFL5NDM'
     dataset = DataSet(access_token=access_token)
     response = dataset.get_model_details(id)
 

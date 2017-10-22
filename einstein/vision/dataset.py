@@ -11,8 +11,8 @@ class DataSet:
     def __init__(self,access_token):
         self.access_token = access_token
 
-    def create_dataset(self, path):
-        type = "image"
+    def create_dataset(self, path, type):
+        #type = "image"
         return self._create_dataset(path, type)
 
     def _create_dataset(self, path, type):
@@ -39,7 +39,7 @@ class DataSet:
                     'datasetId': _id})
         headers = {'Authorization': 'Bearer ' + self.access_token,
                    'Content-Type': multipart_data.content_type}
-        res = requests.delete(DATASETS_URL + '/train',
+        res = requests.delete(DATASETS_URL + '/' + _id,
                             headers=headers, data=multipart_data)
 
         return res

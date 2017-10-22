@@ -12,5 +12,9 @@ LANG_MODEL_URL = LANG_BASE_URL + '/models'
 LANG_INTENT_PREDICT_URL = LANG_BASE_URL + '/intent'
 LANG_SENTIMENT_PREDICT_URL = LANG_BASE_URL + '/sentiment'
 
+TYPE_IMAGE = "image"
+TYPE_IMAGE_DETECTION = "image-detection"
+TYPE_IMAGE_MULTILABEL = "image-multi-label"
+
 ACCESS_TOKEN = ''
 
