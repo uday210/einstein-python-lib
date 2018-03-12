@@ -3,6 +3,7 @@ import requests
 from requests_toolbelt.multipart.encoder import MultipartEncoder
 from einstein.constants import VISION_PREDICT_URL
 from einstein.constants import VISION_DETECT_URL
+import base64
 
 
 class Prediction:
@@ -14,6 +15,24 @@ class Prediction:
         multipart_data = MultipartEncoder(
             fields={'sampleLocation': url,
                     'modelId' : model_id})
+
+        headers = {'Authorization': 'Bearer ' + self.access_token,
+                   'Content-Type': multipart_data.content_type}
+        res = requests.post(VISION_PREDICT_URL,
+                            headers=headers, data=multipart_data)
+        if res.ok:
+            json_response = json.loads(res.text)
+            return json_response
+        else:
+            return res
+
+    def predict_local_image(self, filename, model_id):
+        with open(filename, "rb") as image_file:
+            encoded_string = base64.b64encode(image_file.read())
+        multipart_data = MultipartEncoder(
+            fields={#'sampleContent': '@' + path,
+                    'sampleBase64Content': encoded_string,
+                    'modelId': model_id})
 
         headers = {'Authorization': 'Bearer ' + self.access_token,
                    'Content-Type': multipart_data.content_type}

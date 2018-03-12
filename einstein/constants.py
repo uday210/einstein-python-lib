@@ -16,5 +16,5 @@ TYPE_IMAGE = "image"
 TYPE_IMAGE_DETECTION = "image-detection"
 TYPE_IMAGE_MULTILABEL = "image-multi-label"
 
-ACCESS_TOKEN = ''
+ACCESS_TOKEN = 'ec7b4b22ea6e423ff87780d4f56b65c206395b48'
 

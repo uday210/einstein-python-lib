@@ -7,7 +7,6 @@ def main():
     access_token = ACCESS_TOKEN
     docuemt = 'An intermittently pleasing but mostly routine effort'
     model_id = 'VLEITGZ347BJBAQOHCDFV4VXTI'
-    #model_id = 'DEDB556AH7PIGTLZLXUOZJWTTA'
     prediction = Prediction(access_token=access_token)
     response = prediction.predict_sentiment(docuemt, model_id)
 

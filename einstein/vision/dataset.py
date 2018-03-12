@@ -26,6 +26,7 @@ class DataSet:
                    'Content-Type': multipart_data.content_type}
         res = requests.post(DATASETS_URL + '/upload',
                             headers=headers, data=multipart_data)
+        print(res)
         json_response = json.loads(res.text)
         return json_response
 
